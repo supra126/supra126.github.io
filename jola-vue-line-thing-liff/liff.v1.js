@@ -1,12 +1,12 @@
 // User service UUID: Change this to your generated service UUID
-const USER_SERVICE_UUID         = 'E44A460A-5BC9-11EB-AE93-0242AC130002'; // LED, Button
+const USER_SERVICE_UUID = 'E44A460A-5BC9-11EB-AE93-0242AC130002'; // LED, Button
 // User service characteristics
-const LED_CHARACTERISTIC_UUID   = 'E9062E71-9E62-4BC6-B0D3-35CDCD9B027B';
-const BTN_CHARACTERISTIC_UUID   = '62FBD229-6EDD-4D1A-B554-5C4E1BB29169';
+const LED_CHARACTERISTIC_UUID = 'E9062E71-9E62-4BC6-B0D3-35CDCD9B027B';
+const BTN_CHARACTERISTIC_UUID = '62FBD229-6EDD-4D1A-B554-5C4E1BB29169';
 
 // PSDI Service UUID: Fixed value for Developer Trial
-const PSDI_SERVICE_UUID         = 'E625601E-9E55-4597-A598-76018A0D293D'; // Device ID
-const PSDI_CHARACTERISTIC_UUID  = '26E2B12B-85F0-4F3F-9FDD-91D114270E6E';
+const PSDI_SERVICE_UUID = 'E625601E-9E55-4597-A598-76018A0D293D'; // Device ID
+const PSDI_CHARACTERISTIC_UUID = '26E2B12B-85F0-4F3F-9FDD-91D114270E6E';
 
 // UI settings
 let ledState = false; // true: LED on, false: LED off
@@ -40,9 +40,10 @@ function uiToggleLedButton(state) {
     el.innerText = state ? "Switch LED OFF" : "Switch LED ON";
 
     if (state) {
-      el.classList.add("led-on");
-    } else {
-      el.classList.remove("led-on");
+        el.classList.add("led-on");
+    }
+    else {
+        el.classList.remove("led-on");
     }
 }
 
@@ -59,7 +60,8 @@ function uiToggleStateButton(pressed) {
     if (pressed) {
         el.classList.add("pressed");
         el.innerText = "Pressed";
-    } else {
+    }
+    else {
         el.classList.remove("pressed");
         el.innerText = "Released";
     }
@@ -80,7 +82,8 @@ function uiToggleDeviceConnected(connected) {
         elStatus.innerText = "Device connected";
         // Show controls
         elControls.classList.remove("hidden");
-    } else {
+    }
+    else {
         // Show loading animation
         uiToggleLoadingAnimation(true);
         // Show status disconnected
@@ -98,7 +101,8 @@ function uiToggleLoadingAnimation(isLoading) {
     if (isLoading) {
         // Show loading animation
         elLoading.classList.remove("hidden");
-    } else {
+    }
+    else {
         // Hide loading animation
         elLoading.classList.add("hidden");
     }
@@ -129,7 +133,7 @@ function makeErrorMsg(errorObj) {
 // -------------- //
 
 function initializeApp() {
-    liff.init(() => initializeLiff(), error => uiStatusError(makeErrorMsg(error), false));
+    liff.init({ id: '1541778467-Bo388GAE' }, () => initializeLiff(), error => uiStatusError(makeErrorMsg(error), false));
 }
 
 function initializeLiff() {
@@ -146,7 +150,8 @@ function liffCheckAvailablityAndDo(callbackIfAvailable) {
         if (isAvailable) {
             uiToggleDeviceConnected(false);
             callbackIfAvailable();
-        } else {
+        }
+        else {
             uiStatusError("Bluetooth not available", true);
             setTimeout(() => liffCheckAvailablityAndDo(callbackIfAvailable), 10000);
         }
@@ -249,7 +254,8 @@ function liffGetButtonStateCharacteristic(characteristic) {
             if (val > 0) {
                 // press
                 uiToggleStateButton(true);
-            } else {
+            }
+            else {
                 // release
                 uiToggleStateButton(false);
                 uiCountPressButton();
