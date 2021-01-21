@@ -1,4 +1,4 @@
-# main
+# root
 
 ## Project setup
 ```
